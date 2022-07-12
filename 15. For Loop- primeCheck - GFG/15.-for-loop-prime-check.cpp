@@ -13,9 +13,7 @@ string isPrime(int n) {
     if(n==1){
         return "No";
     }
-    if(n==2){
-        return "Yes";
-    }
+   
     
     for (int i = 2; i <= sqrt(n); i++) {
         // Write your logic here
