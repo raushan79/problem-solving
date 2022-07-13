@@ -1,63 +1,78 @@
 // { Driver Code Starts
-#include <bits/stdc++.h> 
-using namespace std; 
-
+#include <bits/stdc++.h>
+using namespace std;
 
  // } Driver Code Ends
+//User function template for C++
 class Solution{
-    public:
-        //Function to merge the arrays.
-        void merge(long long arr1[], long long arr2[], int n, int m) 
-        { 
-            // code here 
-            int i=n-1;
-            int j=0;
-            while(i>=0 && j<m){
-                if(arr1[i] > arr2[j]){
-                    swap(arr1[i],arr2[j]);
-                }
-                    i--;
-                    j++;
-            }
-            sort(arr1,arr1+n);
-            sort(arr2,arr2+m);
-        } 
-};
-
-// { Driver Code Starts.
-
-int main() 
-{ 
-	
-	int T;
-	cin >> T;
-	
-	while(T--){
-	    int n, m;
-	    cin >> n >> m;
-	    
-	    long long arr1[n], arr2[m];
-	    
-	    for(int i = 0;i<n;i++){
-	        cin >> arr1[i];
+public:
+	void merge(int arr1[], int arr2[], int n, int m) {
+	    // code here
+ int s=n+m;
+	    int ans[s];
+	    int left=0;
+	    int right=0;
+	    int curr=0;
+	    while(left<n && right<m){
+	        if(arr1[left]<arr2[right]){
+	            ans[curr]=arr1[left];
+	            left++;
+	        }else{
+	            ans[curr]=arr2[right];
+	            right++;
+	        }
+	        curr++;
 	    }
 	    
-	    for(int i = 0;i<m;i++){
-	        cin >> arr2[i];
+	    //first array
+	    while(left<n){
+	        ans[curr]=arr1[left];
+	        left++;
+	        curr++;
 	    }
-	    Solution ob;
-	    ob.merge(arr1, arr2, n, m); 
-
-        for (int i = 0; i < n; i++) 
-            cout<<arr1[i]<<" "; 
-        
-       
-	    for (int i = 0; i < m; i++) 
-		    cout<<arr2[i]<<" "; 
 	    
-	    cout<<endl;
+	    // second arr
+	    while(right<m){
+	        ans[curr]=arr2[right];
+	        right++;
+	        curr++;
+	    }
+	   // return ans[s];
+	   int z=0;
+	   for(int i=0;i<n;i++){
+	       arr1[i]=ans[z];
+	       z++;
+	   }
+	   
+	    for(int i=0;i<m;i++){
+	       arr2[i]=ans[z];
+	       z++;
+	   }
 	}
-
-	return 0; 
-} 
-  // } Driver Code Ends
+};
+// { Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m, i;
+        cin >> n >> m;
+        int arr1[n], arr2[m];
+        for (i = 0; i < n; i++) {
+            cin >> arr1[i];
+        }
+        for (i = 0; i < m; i++) {
+            cin >> arr2[i];
+        }
+        Solution ob;
+        ob.merge(arr1, arr2, n, m);
+        for (i = 0; i < n; i++) {
+            cout << arr1[i] << " ";
+        }
+        for (i = 0; i < m; i++) {
+            cout << arr2[i] << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}  // } Driver Code Ends
